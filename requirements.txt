@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+python-docx
+pymupdf
+spacy
+keybert
+transformers
+scikit-learn
+nltk
+fitz
+docx

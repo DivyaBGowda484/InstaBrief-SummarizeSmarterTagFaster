@@ -18,26 +18,29 @@ This system can be applied across various industries such as research publicatio
 
 ## Tools & Technologies
 
-* **Python**: Core programming language.
-* **FastAPI**: Lightweight, high-performance backend framework for building APIs.
-* **React + Tailwind CSS**: Modern frontend stack for a responsive and interactive UI.
-* **spaCy**: For NLP tasks like NER, tokenization, and part-of-speech tagging.
-* **Hugging Face Transformers**: For leveraging pre-trained transformer models (e.g., BERT, T5, BART) for summarization and embeddings.
-* **NLTK**: For text preprocessing (stopword removal, stemming, etc.).
-* **Sentence-Transformers**: For semantic search and document embeddings.
-* **gTTS**: Text-to-speech capabilities for reading summaries aloud (only when opted).
-* **Elasticsearch**: To support full-text search and indexing.
-* **Docker**: For containerization and consistent deployment.
+- **Python**: Core programming language for backend logic.
+- **FastAPI**: High-performance framework for building the backend API.
+- **React + Tailwind CSS**: Modern frontend stack for a responsive and interactive UI.
+- **spaCy**: For NLP tasks like tokenization, named entity recognition (NER), and part-of-speech tagging.
+- **Hugging Face Transformers**: For using pre-trained transformer models like BERT, T5, and BART to perform summarization and embeddings.
+- **NLTK**: For text preprocessing tasks such as stopword removal and stemming.
+- **Sentence-Transformers**: Used for semantic embeddings to enable context-aware document and tag matching.
+- **gTTS**: Text-to-speech library used optionally to convert output summaries into speech.
+- **MongoDB**: A NoSQL document database used to store structured data like uploaded document metadata, user info, summaries, and tags.
+- **Elasticsearch**: Used to enable fast, scalable, full-text search and semantic search capabilities.
+- **Docker**: To containerize the backend, frontend, and database services for consistent development and deployment environments.
 
 ## Project Structure
 
 ```bash
+
 Instabrief/
 ├── app/
 │   ├── __init__.py             # App initialization
 │   ├── summarizer.py           # Summarization logic
 │   ├── tagger.py               # Tagging logic (keywords, entities, categories)
 │   ├── search.py               # Elasticsearch integration
+│   ├── db_mongo.py             # MongoDB logic (insert, retrieve, update documents)
 │   ├── speech.py               # Text-to-speech module
 │   └── integration.py          # External system integration
 ├── data/
@@ -45,23 +48,23 @@ Instabrief/
 │   ├── processed/              # Preprocessed/cleaned text data
 │   └── metadata/               # Generated tags and document meta info
 ├── models/
-│   ├── summarization_model.py  # Wrapper for summarization model
-│   ├── tagging_model.py        # Wrapper for tagging/NER model
+│   ├── summarization_model.py  # Summarization model
+│   ├── tagging_model.py        # Tagging/NER model
 │   └── multilingual_models/    # Support for non-English models
 ├── scripts/
 │   ├── train_model.py          # Model training script
-│   ├── evaluate_model.py       # Evaluation script
-│   └── preprocess_data.py      # Data cleaning and formatting
+│   ├── evaluate_model.py       # Model evaluation
+│   └── preprocess_data.py      # Data preprocessing
 ├── frontend/
 │   ├── src/
 │   │   ├── components/         # React components
 │   │   ├── pages/              # UI pages
-│   │   └── App.jsx             # Main React app file
-│   └── tailwind.config.js      # Tailwind configuration
+│   │   └── App.jsx             # Main React app
+│   └── tailwind.config.js      # Tailwind CSS config
 ├── config/
-│   └── config.yaml             # App and model configuration
+│   └── config.yaml             # App and model configurations
 ├── requirements.txt            # Python dependencies
-├── Dockerfile                  # Containerization setup
+├── Dockerfile                  # Docker container definition
 └── README.md                   # Project documentation
 ```
 
@@ -111,19 +114,16 @@ Instabrief/
 
 ## Usage
 
-- **Upload a Document**: Use the web interface to upload documents in PDF, DOCX, or TXT format.
-- **Summarization**: Automatically generate a summary using transformer-based models. Includes chart generation wherever meaningful.
-- **Tag Extraction**: Get context-aware keywords, named entities, and topic categories.
-- **Search & Retrieve**: Search for documents based on tags or summary content using Elasticsearch.
-
----
+- **Upload a Document**: Upload PDF, DOCX, or TXT files through the React web interface.
+- **Summarization**: Extract key insights using transformer-based models; includes charts when relevant.
+- **Tag Extraction**: Extract context-aware keywords, entities, and topic categories.
+- **Storage**: Summaries, tags, and document metadata are stored in MongoDB.
+- **Search & Retrieve**: Use Elasticsearch for high-speed keyword and semantic-based search.
 
 ## Multilingual Support
 
 Ensure the relevant multilingual model is selected in the configuration file.  
 Supported languages depend on the transformer models in use (e.g., mBART, mT5, etc.).
-
----
 
 ## Deployment
 
@@ -142,6 +142,21 @@ docker run -p 5000:5000 instabrief
 ```
 
 This will start the app inside the container and make it available on http://localhost:5000.
+
+## Database Setup (Local)
+
+### MongoDB (via Docker)
+
+```bash
+docker run -d -p 27017:27017 --name instabrief-mongo mongo
+```
+This starts a local MongoDB instance on port 27017.
+
+# Elasticsearch (via Docker)
+```bash
+docker run -d -p 9200:9200 -e "discovery.type=single-node" --name instabrief-es elasticsearch:7.17.10
+```
+This runs a local Elasticsearch instance accessible at http://localhost:9200.
 
 # For the frontend:
 

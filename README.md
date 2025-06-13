@@ -44,10 +44,14 @@ Instabrief/
 │   ├── db_mongo.py             # MongoDB logic (insert, retrieve, update documents)
 │   ├── speech.py               # Text-to-speech module
 │   └── integration.py          # External system integration
-├── data/
-│   ├── raw/                    # Original uploaded documents
-│   ├── processed/              # Preprocessed/cleaned text data
-│   └── metadata/               # Generated tags and document meta info
+├── config/
+│   └── config.yaml             # App and model configurations
+├── frontend/
+│   ├── src/
+│   │   ├── components/         # React components
+│   │   ├── pages/              # UI pages
+│   │   └── App.jsx             # Main React app
+│   └── tailwind.config.js      # Tailwind CSS config
 ├── models/
 │   ├── summarization_model.py  # Summarization model
 │   ├── tagging_model.py        # Tagging/NER model
@@ -56,17 +60,12 @@ Instabrief/
 │   ├── train_model.py          # Model training script
 │   ├── evaluate_model.py       # Model evaluation
 │   └── preprocess_data.py      # Data preprocessing
-├── frontend/
-│   ├── src/
-│   │   ├── components/         # React components
-│   │   ├── pages/              # UI pages
-│   │   └── App.jsx             # Main React app
-│   └── tailwind.config.js      # Tailwind CSS config
-├── config/
-│   └── config.yaml             # App and model configurations
-├── requirements.txt            # Python dependencies
 ├── Dockerfile                  # Docker container definition
 └── README.md                   # Project documentation
+├── main.py 
+├── requirements.txt            # Python dependencies
+
+
 ```
 
 ## Installation

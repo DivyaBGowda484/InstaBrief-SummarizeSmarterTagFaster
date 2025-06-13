@@ -33,11 +33,12 @@ This system can be applied across various industries such as research publicatio
 ## Project Structure
 
 ```bash
-
 Instabrief/
 ├── app/
 │   ├── __init__.py             # App initialization
 │   ├── summarizer.py           # Summarization logic
+│   ├── extractive_summarizer.py # Extractive summarization logic
+│   ├── abstractive_summarizer.py # Abstractive summarization logic
 │   ├── tagger.py               # Tagging logic (keywords, entities, categories)
 │   ├── search.py               # Elasticsearch integration
 │   ├── db_mongo.py             # MongoDB logic (insert, retrieve, update documents)

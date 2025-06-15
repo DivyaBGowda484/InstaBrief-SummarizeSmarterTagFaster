@@ -1,8 +1,16 @@
 from gtts import gTTS
-import tempfile
+import os
+import uuid
 
-def text_to_speech(text: str) -> str:
-    tts = gTTS(text)
-    file_path = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3").name
-    tts.save(file_path)
-    return file_path
+def text_to_speech(text: str, lang: str = "en") -> str:
+    if not text.strip():
+        raise ValueError("Text is empty")
+
+    filename = f"{uuid.uuid4()}.mp3"
+    output_dir = "generated_audio"
+    os.makedirs(output_dir, exist_ok=True)
+    path = os.path.join(output_dir, filename)
+
+    tts = gTTS(text=text, lang=lang)
+    tts.save(path)
+    return path

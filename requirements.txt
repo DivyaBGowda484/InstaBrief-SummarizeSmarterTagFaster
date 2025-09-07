@@ -1,0 +1,24 @@
+# Core Backend - Minimal
+fastapi
+uvicorn
+pydantic
+pydantic-settings
+python-multipart
+passlib[bcrypt]
+python-jose
+httpx
+requests
+
+# Databases
+motor
+pymongo
+
+# Basic NLP
+nltk
+sumy
+
+# TTS
+gTTS
+
+# Dev
+pytest
